@@ -4,7 +4,7 @@ Python samples for school presentation in IMP 2023 (GFS) at [Gymnasium Plochinge
 
 ## Pre-requisites
 
-- Python 3.9 or higher
+- Python 3.9 or higher recommended, older versions might work, too
 - PyGame 2.0.1 or higher (setup instructions below)
 
 ### Installing PyGame
