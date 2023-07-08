@@ -12,7 +12,7 @@ from GameConfiguration import GameConfiguration
 # initialize pygame and the joystick
 pygame.init()
 pygame.joystick.init()
-
+x= 0
 # check if a joystick is connected
 joystick_count = pygame.joystick.get_count()
 if joystick_count > 0:
@@ -23,7 +23,7 @@ if joystick_count > 0:
     print("Joystick detected: " + joystick.get_name())
 
 # create the screen
-screen = ScreenSetup(500, 500, 40, 60)
+screen = ScreenSetup(1500, 1000, 40, 60)
 
 # create the game setup
 # 3 lives and new ball every 10 seconds
@@ -80,6 +80,14 @@ while run:
                                 if ball.name == "red" or other_ball.name == "red":
                                     hit_count += 1
                                     banner.update_hit_count(hit_count)
+                                elif ball.name == "green" or other_ball.name == "green":
+                                    x = random.randint(1, 50)
+                                    if x == 1:
+                                        if hit_count != 0:
+                                            hit_count -= 1
+                                            banner.update_hit_count(hit_count)
+                                    else:
+                                        game_setup.change_bonuspionts()
                                 else:
                                     randBool = random.choice([True, False])
                                     if randBool:
@@ -104,7 +112,7 @@ while run:
             flag_increase_red_speed = False
             for ball in game_setup.get_ball_list():
                 if ball.name == "red":
-                    ball.change_speed(1)
+                    ball.change_speed(0.5+random.random())
 
         if flag_add_ball:
             ball_added = game_setup.add_ball()
@@ -121,9 +129,9 @@ while run:
                 if event.key == pygame.K_SPACE:
                     game_setup.get_player().flip_full_stop()
                 if event.key == pygame.K_RIGHT:
-                    game_setup.get_player().change_direction(5)
+                    game_setup.get_player().change_direction(10)
                 if event.key == pygame.K_LEFT:
-                    game_setup.get_player().change_direction(-5)
+                    game_setup.get_player().change_direction(-10)
                 if event.key == pygame.K_UP:
                     game_setup.get_player().change_speed(1)
                 if event.key == pygame.K_DOWN:
